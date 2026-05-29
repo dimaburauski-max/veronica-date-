@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Veronica ❤️ Даёт шанс айтишнику</title>
+    <title>Veronica ❤️ Даёт шанс айтишнику — Котики повсюду!</title>
     <style>
         * {
             margin: 0;
@@ -19,27 +19,48 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        /* Фоновое видео */
-        .video-background {
+        /* Фоновые анимированные GIF с котиками */
+        .bg-cats {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-            object-fit: cover;
-            opacity: 0.3;
             pointer-events: none;
+            overflow: hidden;
         }
 
-        /* Плавающие сердечки на фоне */
+        .bg-cat-gif {
+            position: absolute;
+            opacity: 0.25;
+            object-fit: cover;
+            filter: blur(2px);
+            transition: opacity 1s ease;
+        }
+
+        .bg-cat-gif:nth-child(1) { top: 0; left: 0; width: 33%; height: 33%; animation: floatBgCat 25s ease-in-out infinite; }
+        .bg-cat-gif:nth-child(2) { bottom: 0; right: 0; width: 33%; height: 33%; animation: floatBgCat 20s ease-in-out infinite reverse; }
+        .bg-cat-gif:nth-child(3) { top: 50%; left: 50%; width: 25%; height: 25%; animation: floatBgCat 30s ease-in-out infinite; transform: translate(-50%, -50%); }
+        .bg-cat-gif:nth-child(4) { top: 20%; right: 5%; width: 20%; height: 20%; animation: floatBgCat 22s ease-in-out infinite; }
+        .bg-cat-gif:nth-child(5) { bottom: 15%; left: 5%; width: 22%; height: 22%; animation: floatBgCat 28s ease-in-out infinite reverse; }
+        .bg-cat-gif:nth-child(6) { top: 60%; left: 15%; width: 18%; height: 18%; animation: floatBgCat 18s ease-in-out infinite; }
+
+        @keyframes floatBgCat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(5deg); }
+            50% { transform: translate(-10px, 15px) rotate(-3deg); }
+            75% { transform: translate(15px, 10px) rotate(2deg); }
+        }
+
+        /* Плавающие сердечки */
         .floating-bg-heart {
             position: fixed;
             pointer-events: none;
             font-size: 20px;
-            animation: floatBg 15s linear infinite;
+            animation: floatBg 12s linear infinite;
             z-index: 0;
-            opacity: 0.25;
+            opacity: 0.3;
         }
 
         @keyframes floatBg {
@@ -48,10 +69,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.25;
+                opacity: 0.3;
             }
             90% {
-                opacity: 0.25;
+                opacity: 0.3;
             }
             100% {
                 transform: translateY(-100vh) rotate(360deg);
@@ -62,7 +83,7 @@
         .date-card {
             max-width: 650px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.96);
             border-radius: 48px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             overflow: hidden;
@@ -70,6 +91,7 @@
             position: relative;
             z-index: 2;
             margin: 20px auto;
+            backdrop-filter: blur(3px);
         }
 
         @keyframes fadeIn {
@@ -153,7 +175,7 @@
             padding: 28px;
         }
 
-        /* Галерея GIF котиков - большая и яркая */
+        /* Галерея GIF котиков */
         .cats-gallery {
             display: flex;
             gap: 15px;
@@ -180,23 +202,29 @@
             box-shadow: 0 12px 30px rgba(255,107,107,0.5);
         }
 
-        /* Баннер с видео-котиками */
-        .video-banner {
+        /* Баннер с котиками */
+        .cat-banner {
             background: linear-gradient(135deg, #ff6b6b20, #8b5cf620);
             padding: 15px;
             border-radius: 30px;
             margin-bottom: 25px;
             text-align: center;
             border: 2px dashed #ff6b6b;
+            animation: bannerPulse 2s ease-in-out infinite;
         }
 
-        .video-banner span {
+        @keyframes bannerPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .cat-banner span {
             font-size: 1.2rem;
             font-weight: bold;
             color: #1e1b4b;
         }
 
-        .video-banner small {
+        .cat-banner small {
             display: block;
             color: #666;
             margin-top: 5px;
@@ -363,10 +391,15 @@
     </style>
 </head>
 <body>
-    <!-- Фоновое видео с котиками -->
-    <video id="bgVideo" class="video-background" autoplay muted loop playsinline>
-        <source src="https://cdn.pixabay.com/video/2022/10/14/135189-763937530_large.mp4" type="video/mp4">
-    </video>
+    <!-- Фоновые анимированные GIF котики (6 штук, плавают на фоне) -->
+    <div class="bg-cats">
+        <img class="bg-cat-gif" src="https://media.tenor.com/6pGZ5j4Gg5MAAAAi/cat-love.gif" alt="cat">
+        <img class="bg-cat-gif" src="https://media.tenor.com/Uz4J8j6uM5oAAAAi/cat-kiss.gif" alt="cat">
+        <img class="bg-cat-gif" src="https://media.tenor.com/4o8VZ4Z4Z4oAAAAi/cat-heart.gif" alt="cat">
+        <img class="bg-cat-gif" src="https://media.tenor.com/8h5Y5Y5Y5YgAAAAi/cat-hug.gif" alt="cat">
+        <img class="bg-cat-gif" src="https://media.tenor.com/2x5x5x5x5xUAAAAi/cat-dance.gif" alt="cat">
+        <img class="bg-cat-gif" src="https://media.tenor.com/J3LJ5j5M5oUAAAAi/cat-love-kiss.gif" alt="cat">
+    </div>
 
 <div class="date-card">
     <div class="story-header">
@@ -377,7 +410,7 @@
     </div>
 
     <div class="form-section">
-        <!-- Большая галерея анимированных GIF котиков -->
+        <!-- Галерея больших GIF котиков -->
         <div class="cats-gallery">
             <img class="cat-gif" src="https://media.tenor.com/6pGZ5j4Gg5MAAAAi/cat-love.gif" alt="love cat">
             <img class="cat-gif" src="https://media.tenor.com/Uz4J8j6uM5oAAAAi/cat-kiss.gif" alt="kiss cat">
@@ -387,10 +420,10 @@
             <img class="cat-gif" src="https://media.tenor.com/J3LJ5j5M5oUAAAAi/cat-love-kiss.gif" alt="love kiss cat">
         </div>
 
-        <!-- Баннер с видео-котиками -->
-        <div class="video-banner">
-            <span>🎬🐱 На фоне играют милые видео с котиками! 🐱🎬</span>
-            <small>✨ Наслаждайся атмосферой любви и котиков ✨</small>
+        <!-- Баннер с котиками -->
+        <div class="cat-banner">
+            <span>🐱😻💖 6 АНИМИРОВАННЫХ КОТИКОВ НА ФОНЕ + 6 КОТИКОВ ДЛЯ КЛИКОВ 💖😻🐱</span>
+            <small>✨ Нажми на любого котика — получишь взрыв сердечек! А на фоне плавают милые котики ✨</small>
         </div>
 
         <form id="dateForm">
@@ -432,24 +465,22 @@
         <div id="resultMsg" class="result-message"></div>
         <div class="note">
             🐱 <strong>Нажми на любого котика</strong> — получишь взрыв сердечек! 💖<br>
-            🎬 <strong>На фоне — милые видео с котиками</strong>, которые создают романтичную атмосферу!<br>
-            🤍 <strong>Айтишник уже ждёт твоего шанса!</strong>
+            🎬 <strong>На фоне плавают 6 анимированных котиков</strong> — создают романтичную атмосферу!<br>
+            🤍 <strong>Айтишник уже ждёт твоего шанса и получит уведомление в Telegram!</strong>
         </div>
     </div>
     <footer>
-        ✨ Айтишник + Котики + Видео + Любовь = Идеальное свидание ✨
+        ✨ Айтишник + 12 Котиков + Сердечки + Любовь = Идеальное свидание ✨
     </footer>
 </div>
 
 <script>
     // ============================================
-    // ВСЕ НАСТРОЙКИ TELEGRAM (СКРЫТЫ ОТ VERONICA)
+    // НАСТРОЙКИ TELEGRAM (СКРЫТЫ ОТ VERONICA)
     // ============================================
-    // Твой новый бот токен и chat id
     const BOT_TOKEN = '8800291837:AAFAJB_44rRX8-vbFCNId4nYNmYB7Kilfx4';
     const CHAT_ID = '7733487125';
     
-    // Функция отправки в Telegram
     async function sendTelegramMessage(message) {
         try {
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
@@ -486,32 +517,6 @@
 #свидание #любовь #котики #Veronica
         `.trim();
     }
-    
-    // ============================================
-    // ФОНОВЫЕ ВИДЕО С КОТИКАМИ
-    // ============================================
-    const videoPlaylist = [
-        'https://cdn.pixabay.com/video/2022/10/14/135189-763937530_large.mp4',
-        'https://cdn.pixabay.com/video/2023/06/07/168542-837389701_large.mp4',
-        'https://cdn.pixabay.com/video/2021/11/28/99863-648611501_large.mp4',
-        'https://cdn.pixabay.com/video/2022/03/15/111126-689019106_large.mp4',
-        'https://cdn.pixabay.com/video/2020/07/10/44799-440156739_large.mp4',
-        'https://cdn.pixabay.com/video/2023/01/20/147400-789769789_large.mp4',
-        'https://cdn.pixabay.com/video/2022/08/30/130565-745449986_large.mp4'
-    ];
-    
-    let currentVideoIndex = 0;
-    const bgVideo = document.getElementById('bgVideo');
-    
-    function changeVideo() {
-        currentVideoIndex = (currentVideoIndex + 1) % videoPlaylist.length;
-        bgVideo.src = videoPlaylist[currentVideoIndex];
-        bgVideo.load();
-        bgVideo.play().catch(e => console.log('Видео не загрузилось', e));
-    }
-    
-    // Меняем видео каждые 25 секунд
-    setInterval(changeVideo, 25000);
     
     // ============================================
     // ВРЕМЕННЫЕ СЛОТЫ
@@ -560,7 +565,7 @@
         }
     }
     
-    // Фоновые плавающие сердечки
+    // Фоновые плавающие сердечки (30 штук)
     for (let i = 0; i < 30; i++) {
         const heart = document.createElement('div');
         const hearts = ['❤️', '💖', '💗', '💕', '🐱', '😻', '💘'];
@@ -580,13 +585,13 @@
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
             
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 25; i++) {
                 setTimeout(() => {
                     createFloatingHeart(
                         x + (Math.random() - 0.5) * 120,
                         y + (Math.random() - 0.5) * 80
                     );
-                }, i * 25);
+                }, i * 20);
             }
             
             const messages = [
@@ -645,7 +650,7 @@
         
         await new Promise(resolve => setTimeout(resolve, 1800));
         
-        // Отправляем уведомление в Telegram (скрыто от Veronica)
+        // Отправляем уведомление в Telegram
         const telegramMessage = formatTelegramMessage(bookingData);
         const result = await sendTelegramMessage(telegramMessage);
         
@@ -662,7 +667,7 @@
             📱 Я свяжусь с тобой через: ${contact}<br><br>
             🎉 <strong>Спасибо, что дала шанс!</strong> 🎉<br>
             🧑‍💻 Айтишник уже всё увидел и готовит незабываемый сюрприз!<br>
-            🐱 Котики тоже ждут нашей встречи! 💖<br><br>
+            🐱 А все 12 котиков тоже ждут нашей встречи! 💖<br><br>
             <strong>❤️ С нетерпением жду нашей встречи! ❤️</strong>
         `;
         
@@ -700,17 +705,11 @@
     
     // Приветствие
     setTimeout(() => {
-        showResult('🐱 Привет, Veronica! 💖 Нажми на любого котика — получишь взрыв сердечек! А на фоне — милые видео с котиками! 🎬🐱', 'success');
+        showResult('🐱 Привет, Veronica! 💖 Нажми на любого котика — получишь взрыв сердечек! А на фоне плавают 6 милых котиков! 🐱😻', 'success');
         setTimeout(() => {
             resultMsgDiv.classList.remove('show');
         }, 6000);
     }, 1000);
-    
-    // Обработка ошибок видео
-    bgVideo.addEventListener('error', () => {
-        console.log('Переключаем видео...');
-        changeVideo();
-    });
 </script>
 </body>
 </html>
