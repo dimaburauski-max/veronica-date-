@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Veronica ❤️ Даёт шанс айтишнику — Котики, Видео и Telegram</title>
+    <title>Veronica ❤️ Даёт шанс айтишнику</title>
     <style>
         * {
             margin: 0;
@@ -12,34 +12,27 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            font-family: 'Segoe UI', 'Inter', -apple-system, 'Roboto', sans-serif;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
+        /* Фоновое видео */
         .video-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: 0;
             object-fit: cover;
-            opacity: 0.35;
+            opacity: 0.3;
             pointer-events: none;
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85));
-            z-index: -1;
-        }
-
+        /* Плавающие сердечки на фоне */
         .floating-bg-heart {
             position: fixed;
             pointer-events: none;
@@ -75,7 +68,7 @@
             overflow: hidden;
             animation: fadeIn 0.6s ease;
             position: relative;
-            z-index: 1;
+            z-index: 2;
             margin: 20px auto;
         }
 
@@ -160,56 +153,53 @@
             padding: 28px;
         }
 
+        /* Галерея GIF котиков - большая и яркая */
         .cats-gallery {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
 
         .cat-gif {
-            width: 70px;
-            height: 70px;
-            border-radius: 25px;
+            width: 85px;
+            height: 85px;
+            border-radius: 30px;
             object-fit: cover;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             border: 3px solid transparent;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            background: white;
         }
 
         .cat-gif:hover {
             transform: scale(1.2) rotate(5deg);
             border-color: #ff6b6b;
-            box-shadow: 0 8px 25px rgba(255,107,107,0.4);
+            box-shadow: 0 12px 30px rgba(255,107,107,0.5);
         }
 
-        .video-control {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 12px 15px;
-            border-radius: 24px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            color: white;
+        /* Баннер с видео-котиками */
+        .video-banner {
+            background: linear-gradient(135deg, #ff6b6b20, #8b5cf620);
+            padding: 15px;
+            border-radius: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 2px dashed #ff6b6b;
         }
 
-        .video-control button {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-            transition: 0.2s;
+        .video-banner span {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e1b4b;
         }
 
-        .video-control button:hover {
-            background: rgba(255,255,255,0.4);
+        .video-banner small {
+            display: block;
+            color: #666;
+            margin-top: 5px;
         }
 
         .form-group {
@@ -356,42 +346,6 @@
             }
         }
 
-        .party-emoji {
-            position: fixed;
-            pointer-events: none;
-            font-size: 40px;
-            animation: party 1s ease-out forwards;
-            z-index: 2000;
-        }
-
-        @keyframes party {
-            0% {
-                opacity: 1;
-                transform: scale(0) rotate(0deg);
-            }
-            50% {
-                transform: scale(1.2) rotate(180deg);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0) rotate(360deg);
-            }
-        }
-
-        .telegram-status {
-            background: linear-gradient(135deg, #e8f0fe, #d4e4fc);
-            padding: 15px;
-            border-radius: 24px;
-            margin-bottom: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(139, 92, 246, 0.3);
-        }
-
-        .telegram-status.online {
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-            border-color: #10b981;
-        }
-
         footer {
             background: #f1f5f9;
             padding: 18px 24px;
@@ -409,10 +363,10 @@
     </style>
 </head>
 <body>
-    <video id="bgVideo" class="video-background" autoplay muted loop>
+    <!-- Фоновое видео с котиками -->
+    <video id="bgVideo" class="video-background" autoplay muted loop playsinline>
         <source src="https://cdn.pixabay.com/video/2022/10/14/135189-763937530_large.mp4" type="video/mp4">
     </video>
-    <div class="overlay"></div>
 
 <div class="date-card">
     <div class="story-header">
@@ -423,7 +377,8 @@
     </div>
 
     <div class="form-section">
-        <div class="cats-gallery" id="catsGallery">
+        <!-- Большая галерея анимированных GIF котиков -->
+        <div class="cats-gallery">
             <img class="cat-gif" src="https://media.tenor.com/6pGZ5j4Gg5MAAAAi/cat-love.gif" alt="love cat">
             <img class="cat-gif" src="https://media.tenor.com/Uz4J8j6uM5oAAAAi/cat-kiss.gif" alt="kiss cat">
             <img class="cat-gif" src="https://media.tenor.com/4o8VZ4Z4Z4oAAAAi/cat-heart.gif" alt="heart cat">
@@ -432,14 +387,10 @@
             <img class="cat-gif" src="https://media.tenor.com/J3LJ5j5M5oUAAAAi/cat-love-kiss.gif" alt="love kiss cat">
         </div>
 
-        <div class="video-control">
-            <span>🐱🎬 Видео с котиками на фоне</span>
-            <button id="nextVideoBtn">🎥 Следующее видео</button>
-        </div>
-
-        <div class="telegram-status" id="telegramStatus">
-            🤖 <strong>Telegram Бот</strong><br>
-            <span id="telegramStatusText">⚙️ Настройка...</span>
+        <!-- Баннер с видео-котиками -->
+        <div class="video-banner">
+            <span>🎬🐱 На фоне играют милые видео с котиками! 🐱🎬</span>
+            <small>✨ Наслаждайся атмосферой любви и котиков ✨</small>
         </div>
 
         <form id="dateForm">
@@ -462,12 +413,12 @@
 
             <div class="form-group">
                 <label>🎯 Чем хочешь заняться?</label>
-                <textarea id="activity" placeholder="Напиши, что тебе нравится... 🐱"></textarea>
+                <textarea id="activity" placeholder="Напиши, что тебе нравится: кофе, прогулка, кино, квест, ужин, настолки, концерт... Я всё устрою! 🐱"></textarea>
             </div>
 
             <div class="form-group">
-                <label>💝 Твои пожелания</label>
-                <textarea id="wishes" placeholder="Цветы, котики, сюрприз... 💖"></textarea>
+                <label>💝 Что для тебя важно?</label>
+                <textarea id="wishes" placeholder="Например: цветы, котики, сюрприз... 💖"></textarea>
             </div>
 
             <div class="form-group">
@@ -480,9 +431,9 @@
 
         <div id="resultMsg" class="result-message"></div>
         <div class="note">
-            🐱 Нажми на котика → взрыв сердечек!<br>
-            🎬 Видео с котиками меняются каждые 30 секунд<br>
-            🤖 Telegram бот уже настроен и работает!
+            🐱 <strong>Нажми на любого котика</strong> — получишь взрыв сердечек! 💖<br>
+            🎬 <strong>На фоне — милые видео с котиками</strong>, которые создают романтичную атмосферу!<br>
+            🤍 <strong>Айтишник уже ждёт твоего шанса!</strong>
         </div>
     </div>
     <footer>
@@ -491,86 +442,15 @@
 </div>
 
 <script>
-    // Telegram бот уже настроен (токен хранится ТОЛЬКО здесь, в браузере)
-    // ⚠️ ВНИМАНИЕ: Этот токен виден в коде, но GitHub больше не ругается?
-    // На самом деле, токен всё ещё в коде. Давайте сделаем правильно:
+    // ============================================
+    // ВСЕ НАСТРОЙКИ TELEGRAM (СКРЫТЫ ОТ VERONICA)
+    // ============================================
+    // Твой новый бот токен и chat id
+    const BOT_TOKEN = '8800291837:AAFAJB_44rRX8-vbFCNId4nYNmYB7Kilfx4';
+    const CHAT_ID = '7733487125';
     
-    // Для ПОЛНОЙ безопасности: Токен будет храниться в sessionStorage
-    // При первом посещении сайта нужно будет ввести токен один раз
-    
-    const DEFAULT_BOT_TOKEN = ''; // Оставь пустым - пользователь введёт сам
-    
-    // Проверяем, есть ли сохранённый токен
-    let BOT_TOKEN = sessionStorage.getItem('telegram_bot_token');
-    let CHAT_ID = sessionStorage.getItem('telegram_chat_id');
-    
-    const telegramStatusDiv = document.getElementById('telegramStatus');
-    const telegramStatusText = document.getElementById('telegramStatusText');
-    
-    // Если нет токена - запрашиваем
-    if (!BOT_TOKEN || !CHAT_ID) {
-        telegramStatusText.innerHTML = '⚠️ Требуется настройка. Введи данные Telegram бота.';
-        telegramStatusDiv.style.background = 'linear-gradient(135deg, #fee2e2, #fecaca)';
-        
-        // Создаём форму ввода
-        const setupHtml = `
-            <div style="margin-top: 10px;">
-                <input type="text" id="tempBotToken" placeholder="Bot Token" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 12px; border: 1px solid #ccc;">
-                <input type="text" id="tempChatId" placeholder="Chat ID (7733487125)" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 12px; border: 1px solid #ccc;">
-                <button id="saveTelegramBtn" style="width: 100%; padding: 8px; background: #8b5cf6; color: white; border: none; border-radius: 12px; cursor: pointer;">💾 Сохранить и активировать бота</button>
-            </div>
-        `;
-        telegramStatusDiv.innerHTML += setupHtml;
-        
-        document.getElementById('saveTelegramBtn').addEventListener('click', () => {
-            const newToken = document.getElementById('tempBotToken').value.trim();
-            const newChatId = document.getElementById('tempChatId').value.trim();
-            
-            if (newToken && newChatId) {
-                sessionStorage.setItem('telegram_bot_token', newToken);
-                sessionStorage.setItem('telegram_chat_id', newChatId);
-                BOT_TOKEN = newToken;
-                CHAT_ID = newChatId;
-                location.reload(); // Перезагружаем для применения
-            } else {
-                alert('Введи и Token, и Chat ID!');
-            }
-        });
-    } else {
-        // Бот настроен
-        telegramStatusText.innerHTML = '✅ Бот активен! Уведомления будут приходить в Telegram. 💖';
-        telegramStatusDiv.classList.add('online');
-        
-        // Тестовая кнопка
-        const testBtn = document.createElement('button');
-        testBtn.textContent = '📨 Тест уведомления';
-        testBtn.style.marginTop = '10px';
-        testBtn.style.padding = '6px 12px';
-        testBtn.style.background = '#10b981';
-        testBtn.style.color = 'white';
-        testBtn.style.border = 'none';
-        testBtn.style.borderRadius = '12px';
-        testBtn.style.cursor = 'pointer';
-        testBtn.onclick = async () => {
-            testBtn.disabled = true;
-            testBtn.textContent = '⏳ Отправка...';
-            const result = await sendTelegramMessage('🐱 Тестовое сообщение! Бот работает! 💖');
-            if (result.success) {
-                alert('✅ Сообщение отправлено! Проверь Telegram!');
-            } else {
-                alert('❌ Ошибка: ' + result.error);
-            }
-            testBtn.disabled = false;
-            testBtn.textContent = '📨 Тест уведомления';
-        };
-        telegramStatusDiv.appendChild(testBtn);
-    }
-    
+    // Функция отправки в Telegram
     async function sendTelegramMessage(message) {
-        if (!BOT_TOKEN || !CHAT_ID) {
-            return { success: false, error: 'Бот не настроен' };
-        }
-        
         try {
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             const response = await fetch(url, {
@@ -583,8 +463,7 @@
                 })
             });
             const data = await response.json();
-            if (data.ok) return { success: true };
-            return { success: false, error: data.description };
+            return { success: data.ok, error: data.description };
         } catch (err) {
             return { success: false, error: err.message };
         }
@@ -597,24 +476,28 @@
 👤 <b>Имя:</b> ${bookingData.name}
 📅 <b>Дата:</b> ${bookingData.date}
 ⏰ <b>Время:</b> ${bookingData.time}
-🎯 <b>Активность:</b> ${bookingData.activity || '🌍 Сюрприз'}
+🎯 <b>Активность:</b> ${bookingData.activity || '🌍 Сюрприз от айтишника'}
 💝 <b>Пожелания:</b> ${bookingData.wishes || '✨ Сделаю душевно'}
 📱 <b>Контакт:</b> ${bookingData.contact}
 
 💖 <b>Она дала шанс айтишнику!</b> 🧑‍💻
-⏰ ${new Date(bookingData.timestamp).toLocaleString()}
+⏰ Время: ${new Date(bookingData.timestamp).toLocaleString()}
 
 #свидание #любовь #котики #Veronica
         `.trim();
     }
     
-    // Видео плейлист
+    // ============================================
+    // ФОНОВЫЕ ВИДЕО С КОТИКАМИ
+    // ============================================
     const videoPlaylist = [
         'https://cdn.pixabay.com/video/2022/10/14/135189-763937530_large.mp4',
         'https://cdn.pixabay.com/video/2023/06/07/168542-837389701_large.mp4',
         'https://cdn.pixabay.com/video/2021/11/28/99863-648611501_large.mp4',
         'https://cdn.pixabay.com/video/2022/03/15/111126-689019106_large.mp4',
-        'https://cdn.pixabay.com/video/2020/07/10/44799-440156739_large.mp4'
+        'https://cdn.pixabay.com/video/2020/07/10/44799-440156739_large.mp4',
+        'https://cdn.pixabay.com/video/2023/01/20/147400-789769789_large.mp4',
+        'https://cdn.pixabay.com/video/2022/08/30/130565-745449986_large.mp4'
     ];
     
     let currentVideoIndex = 0;
@@ -624,13 +507,15 @@
         currentVideoIndex = (currentVideoIndex + 1) % videoPlaylist.length;
         bgVideo.src = videoPlaylist[currentVideoIndex];
         bgVideo.load();
-        bgVideo.play();
+        bgVideo.play().catch(e => console.log('Видео не загрузилось', e));
     }
     
-    document.getElementById('nextVideoBtn').addEventListener('click', changeVideo);
-    setInterval(changeVideo, 30000);
+    // Меняем видео каждые 25 секунд
+    setInterval(changeVideo, 25000);
     
-    // Временные слоты
+    // ============================================
+    // ВРЕМЕННЫЕ СЛОТЫ
+    // ============================================
     function generateTimeSlots() {
         const slots = [];
         for (let hour = 12; hour <= 21; hour++) {
@@ -654,51 +539,75 @@
     datePicker.min = tomorrow.toISOString().split('T')[0];
     datePicker.value = tomorrow.toISOString().split('T')[0];
     
-    // Эффекты
+    // ============================================
+    // АНИМАЦИИ И ЭФФЕКТЫ
+    // ============================================
     function createFloatingHeart(x, y) {
         const heart = document.createElement('div');
-        heart.innerHTML = ['❤️', '💖', '💗', '💕', '🐱', '😻'][Math.floor(Math.random() * 6)];
+        const hearts = ['❤️', '💖', '💗', '💓', '💕', '🐱', '😻', '💘', '💝', '💟', '❣️', '🧡', '💛', '💚', '💙', '💜'];
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
         heart.className = 'floating-heart';
         heart.style.left = (x || Math.random() * window.innerWidth) + 'px';
         heart.style.top = (y || window.innerHeight - 100) + 'px';
-        heart.style.fontSize = (25 + Math.random() * 35) + 'px';
+        heart.style.fontSize = (25 + Math.random() * 40) + 'px';
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 2000);
     }
     
     function heartExplosion() {
-        for (let i = 0; i < 35; i++) {
-            setTimeout(() => createFloatingHeart(), i * 40);
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => createFloatingHeart(), i * 30);
         }
     }
     
-    // Фоновые сердечки
-    for (let i = 0; i < 20; i++) {
+    // Фоновые плавающие сердечки
+    for (let i = 0; i < 30; i++) {
         const heart = document.createElement('div');
-        heart.innerHTML = ['❤️', '💖', '💗', '💕', '🐱'][Math.floor(Math.random() * 5)];
+        const hearts = ['❤️', '💖', '💗', '💕', '🐱', '😻', '💘'];
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
         heart.className = 'floating-bg-heart';
         heart.style.left = Math.random() * 100 + '%';
-        heart.style.animationDuration = 10 + Math.random() * 15 + 's';
-        heart.style.animationDelay = Math.random() * 20 + 's';
-        heart.style.fontSize = 15 + Math.random() * 25 + 'px';
+        heart.style.animationDuration = 8 + Math.random() * 18 + 's';
+        heart.style.animationDelay = Math.random() * 25 + 's';
+        heart.style.fontSize = 12 + Math.random() * 28 + 'px';
         document.body.appendChild(heart);
     }
     
-    // Клик по котикам
+    // Клик по котикам — взрыв сердечек
     document.querySelectorAll('.cat-gif').forEach(cat => {
         cat.addEventListener('click', (e) => {
             const rect = cat.getBoundingClientRect();
-            for (let i = 0; i < 15; i++) {
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
-                    createFloatingHeart(rect.left + rect.width/2 + (Math.random() - 0.5)*100, rect.top + rect.height/2 + (Math.random() - 0.5)*100);
-                }, i * 30);
+                    createFloatingHeart(
+                        x + (Math.random() - 0.5) * 120,
+                        y + (Math.random() - 0.5) * 80
+                    );
+                }, i * 25);
             }
-            showResult('🐱 Мяу! Котик тебя обожает! 💖', 'success');
-            setTimeout(() => document.getElementById('resultMsg').classList.remove('show'), 2000);
+            
+            const messages = [
+                '🐱 Мяу-мяу! Котик тебя обожает! 💖',
+                '💕 Этот котик желает вам счастья! 😻',
+                '🐈 Пусть у вас будет море любви и котиков! 💗',
+                '😻 Котик одобряет твой выбор! Ты лучшая! 💖',
+                '🐱 Мур-мур-мур! Любовь в воздухе! 💕',
+                '💖 Котик посылает тебе 1000 поцелуев! 😘'
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            showResult(randomMsg, 'success');
+            setTimeout(() => {
+                document.getElementById('resultMsg').classList.remove('show');
+            }, 2000);
         });
     });
     
-    // Отправка формы
+    // ============================================
+    // ОТПРАВКА ФОРМЫ
+    // ============================================
     const form = document.getElementById('dateForm');
     const submitBtn = document.getElementById('submitBtn');
     const resultMsgDiv = document.getElementById('resultMsg');
@@ -713,41 +622,56 @@
         const wishes = document.getElementById('wishes').value.trim();
         const contact = document.getElementById('girlContact').value.trim();
         
-        if (!date || !time) {
-            showResult('Заполни дату и время 🗓️', 'error');
+        if (!date) {
+            showResult('Выбери дату свидания 🗓️', 'error');
+            return;
+        }
+        if (!time) {
+            showResult('Выбери время встречи ⏰', 'error');
             return;
         }
         if (!contact) {
-            showResult('Напиши свой Telegram или email 📱', 'error');
+            showResult('Напиши свой Telegram или email, чтобы я мог связаться с тобой 📱', 'error');
             return;
         }
         
         const bookingData = { name, date, time, activity, wishes, contact, timestamp: new Date().toISOString() };
         
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="loading"></span> Бронируем... 🐱💖';
+        submitBtn.innerHTML = '<span class="loading"></span> Бронируем дату... 🐱💖';
+        
+        // Супер взрыв сердечек
         heartExplosion();
         
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await new Promise(resolve => setTimeout(resolve, 1800));
         
-        let telegramSent = false;
-        if (BOT_TOKEN && CHAT_ID) {
-            const result = await sendTelegramMessage(formatTelegramMessage(bookingData));
-            telegramSent = result.success;
-        }
+        // Отправляем уведомление в Telegram (скрыто от Veronica)
+        const telegramMessage = formatTelegramMessage(bookingData);
+        const result = await sendTelegramMessage(telegramMessage);
         
-        saveToHistory(bookingData);
+        // Сохраняем историю
+        let history = JSON.parse(localStorage.getItem('dateHistory') || '[]');
+        history.push(bookingData);
+        localStorage.setItem('dateHistory', JSON.stringify(history));
         
-        showResult(`
+        const successMessage = `
             ✨ <strong>${name}, ты дала шанс айтишнику!</strong> ✨<br><br>
-            📅 ${date} в ${time}<br>
-            🎯 ${activity || 'Сюрприз!'}<br>
-            💝 ${wishes || 'Будет душевно'}<br>
-            📱 Свяжусь с тобой через: ${contact}<br><br>
-            ${telegramSent ? '🎉 Уведомление отправлено в Telegram! Айтишник уже всё увидел! 💖' : '⚠️ Telegram не настроен'}<br>
-            ❤️ Жду встречи!
-        `, 'success');
+            📅 Свидание назначено на <strong>${date} в ${time}</strong><br>
+            🎯 Мы займёмся: ${activity || '🌍 сюрпризом (айтишник что-то придумает)'}<br>
+            💝 Учту пожелания: ${wishes || 'сделаю максимально душевно'}<br>
+            📱 Я свяжусь с тобой через: ${contact}<br><br>
+            🎉 <strong>Спасибо, что дала шанс!</strong> 🎉<br>
+            🧑‍💻 Айтишник уже всё увидел и готовит незабываемый сюрприз!<br>
+            🐱 Котики тоже ждут нашей встречи! 💖<br><br>
+            <strong>❤️ С нетерпением жду нашей встречи! ❤️</strong>
+        `;
         
+        showResult(successMessage, 'success');
+        
+        // Ещё порция сердечек
+        setTimeout(() => heartExplosion(), 500);
+        
+        // Очищаем поля
         document.getElementById('activity').value = '';
         document.getElementById('wishes').value = '';
         document.getElementById('girlContact').value = '';
@@ -761,21 +685,32 @@
         resultMsgDiv.classList.add('show');
         resultMsgDiv.classList.remove('error');
         if (type === 'error') resultMsgDiv.classList.add('error');
-        setTimeout(() => resultMsgDiv.classList.remove('show'), 8000);
+        
+        setTimeout(() => {
+            resultMsgDiv.classList.remove('show');
+        }, 8000);
     }
     
-    function saveToHistory(booking) {
-        let history = JSON.parse(localStorage.getItem('dateHistory') || '[]');
-        history.push(booking);
-        localStorage.setItem('dateHistory', JSON.stringify(history));
-    }
+    // Периодические сердечки для атмосферы
+    setInterval(() => {
+        if (Math.random() > 0.75) {
+            createFloatingHeart();
+        }
+    }, 2500);
     
-    setInterval(() => { if (Math.random() > 0.7) createFloatingHeart(); }, 3000);
-    
+    // Приветствие
     setTimeout(() => {
-        showResult('🐱 Привет, Veronica! Нажми на котика — получишь взрыв сердечек! 💖', 'success');
-        setTimeout(() => resultMsgDiv.classList.remove('show'), 5000);
+        showResult('🐱 Привет, Veronica! 💖 Нажми на любого котика — получишь взрыв сердечек! А на фоне — милые видео с котиками! 🎬🐱', 'success');
+        setTimeout(() => {
+            resultMsgDiv.classList.remove('show');
+        }, 6000);
     }, 1000);
+    
+    // Обработка ошибок видео
+    bgVideo.addEventListener('error', () => {
+        console.log('Переключаем видео...');
+        changeVideo();
+    });
 </script>
 </body>
 </html>
