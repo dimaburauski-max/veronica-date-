@@ -20,10 +20,10 @@
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
-            transition: background 0.5s ease;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="27" viewBox="0 0 24 27"><path fill="red" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
         }
 
+        /* Glassmorphism стиль */
         .dynamic-bg {
             position: fixed;
             top: 0;
@@ -42,10 +42,11 @@
             height: 100%;
             z-index: -1;
             background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(0px);
         }
 
         /* Анимации */
-        .falling-flower, .falling-petal {
+        .falling-flower {
             position: fixed;
             pointer-events: none;
             font-size: 25px;
@@ -75,7 +76,7 @@
             50% { opacity: 0.9; transform: scale(1.2); }
         }
 
-        .flying-cat, .flying-heart {
+        .flying-cat {
             position: fixed;
             pointer-events: none;
             z-index: 0;
@@ -90,17 +91,32 @@
             100% { transform: translateX(calc(100vw + 100px)) translateY(50px) rotate(360deg); opacity: 0; }
         }
 
+        .rotating-star {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            animation: rotateStar 8s linear infinite;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        @keyframes rotateStar {
+            from { transform: rotate(0deg) scale(1); }
+            to { transform: rotate(360deg) scale(1.5); }
+        }
+
+        /* Glassmorphism карточка */
         .date-card {
-            max-width: 700px;
+            max-width: 750px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
             border-radius: 48px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2);
             overflow: hidden;
             animation: fadeIn 0.6s ease;
             position: relative;
             z-index: 2;
-            backdrop-filter: blur(3px);
         }
 
         @keyframes fadeIn {
@@ -109,12 +125,14 @@
         }
 
         .story-header {
-            background: linear-gradient(105deg, #1a1a2e 0%, #16213e 100%);
+            background: rgba(26, 26, 46, 0.7);
+            backdrop-filter: blur(10px);
             padding: 25px 20px 20px;
             color: white;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .avatar-icon {
@@ -122,6 +140,7 @@
             margin-bottom: 10px;
             animation: bounce 2s ease-in-out infinite;
             display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(255,107,107,0.5));
         }
 
         @keyframes bounce {
@@ -130,13 +149,13 @@
         }
 
         .datetime-container {
-            background: linear-gradient(135deg, rgba(255,107,107,0.2), rgba(139,92,246,0.2));
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             border-radius: 50px;
             padding: 12px 20px;
             margin: 10px auto;
             display: inline-block;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             animation: pulseBorder 2s ease-in-out infinite;
         }
 
@@ -156,7 +175,8 @@
         .current-time { font-size: 1.8rem; margin-top: 5px; }
 
         .love-name-container {
-            background: linear-gradient(135deg, #ff6b6b40, #ec489a40, #8b5cf640);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             border-radius: 70px;
             padding: 10px 20px;
             margin: 15px auto;
@@ -188,12 +208,22 @@
         @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
         .compliment-banner {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             border-radius: 40px;
             padding: 8px 15px;
             margin: 10px auto;
             font-size: 0.85rem;
-            animation: slideIn 0.5s ease;
+        }
+
+        .online-status {
+            background: rgba(0, 255, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin: 5px auto;
+            display: inline-block;
+            font-size: 0.7rem;
         }
 
         .stats-container {
@@ -204,14 +234,16 @@
             flex-wrap: wrap;
         }
         .stat-card {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.8rem;
         }
 
         .countdown-section {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 8px;
             margin-top: 12px;
@@ -225,23 +257,38 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-        .countdown-item { background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 10px; }
+        .countdown-item { background: rgba(0, 0, 0, 0.3); padding: 4px 8px; border-radius: 10px; }
 
-        .form-section { padding: 25px; }
+        .form-section {
+            padding: 25px;
+        }
 
-        .quiz-section, .game-section, .surprise-mode-section, .calendar-section, .achievements-section, .fortune-section {
-            background: linear-gradient(135deg, #ff6b6b20, #8b5cf620);
+        /* Glassmorphism секции */
+        .quiz-section, .game-section, .surprise-mode-section, .calendar-section, .achievements-section, .fortune-section, .wheel-section, .coloring-section, .flower-collect-section, .voice-section, .secret-messages-section {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
             padding: 15px;
             border-radius: 30px;
             margin-bottom: 20px;
-            border: 2px solid #ff6b6b;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: 0.3s;
+        }
+        .quiz-section:hover, .game-section:hover, .coloring-section:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.25);
         }
 
         .quiz-question { font-weight: bold; margin-bottom: 10px; color: #1e1b4b; font-size: 0.95rem; }
         .quiz-options { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
         .quiz-btn {
-            background: white; border: 2px solid #8b5cf6; padding: 6px 12px; border-radius: 20px;
-            cursor: pointer; transition: 0.2s; font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border: 2px solid #8b5cf6;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
         }
         .quiz-btn:hover { background: #8b5cf6; color: white; transform: scale(1.05); }
 
@@ -250,12 +297,19 @@
         .hidden-heart:hover { opacity: 1; transform: scale(1.2); }
         .found { opacity: 1; text-shadow: 0 0 10px red; }
 
-        .surprise-btn {
+        .surprise-btn, .wheel-btn, .voice-btn {
             background: linear-gradient(95deg, #ec489a, #8b5cf6);
-            color: white; border: none; padding: 10px 20px;
-            border-radius: 30px; cursor: pointer; font-weight: bold;
-            width: 100%; margin-top: 10px;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s;
         }
+        .surprise-btn:hover, .wheel-btn:hover { transform: scale(1.02); box-shadow: 0 5px 15px rgba(236,72,153,0.4); }
 
         .calendar-grid {
             display: grid;
@@ -264,7 +318,8 @@
             margin-top: 10px;
         }
         .calendar-day {
-            background: rgba(255,255,255,0.5);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
             padding: 8px;
             text-align: center;
             border-radius: 10px;
@@ -277,22 +332,93 @@
 
         .achievement-badge {
             display: inline-block;
-            background: gold;
+            background: linear-gradient(95deg, gold, #ffd700);
             color: #1e1b4b;
             padding: 5px 10px;
             border-radius: 20px;
             margin: 5px;
             font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Исправленная раскраска */
+        .coloring-canvas {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .coloring-item {
+            font-size: 55px;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 10px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .coloring-item:hover { transform: scale(1.1); background: rgba(255,107,107,0.4); }
+        .color-picker { margin: 15px 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .color-option { 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            border: 3px solid white;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .color-option:hover { transform: scale(1.15); border-color: gold; }
+
+        .flower-collect-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+        .flower-item {
+            font-size: 45px;
+            cursor: pointer;
+            transition: 0.2s;
+            opacity: 0.5;
+            filter: grayscale(0.5);
+        }
+        .flower-item.collected { opacity: 1; filter: drop-shadow(0 0 8px gold) grayscale(0); transform: scale(1.05); }
+        
+        .wheel {
+            width: 180px;
+            height: 180px;
+            margin: 10px auto;
+            position: relative;
+            cursor: pointer;
+        }
+        .wheel svg { width: 100%; height: 100%; transition: transform 3s cubic-bezier(0.2, 0.8, 0.3, 1); }
+        
+        .secret-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ff6b6b;
+            background: rgba(255,255,255,0.9);
+            margin: 10px 0;
         }
 
         .form-group { margin-bottom: 18px; }
-        label { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #1e1b4b; margin-bottom: 8px; font-size: 0.9rem; }
+        label { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #1e1b4b; margin-bottom: 8px; font-size: 0.9rem; text-shadow: 0 1px 1px rgba(255,255,255,0.5); }
         input, select, textarea {
-            width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 24px;
-            font-size: 0.95rem; font-family: inherit; transition: all 0.3s; background: #f8fafc;
+            width: 100%; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 24px; font-size: 0.95rem; font-family: inherit;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px);
+            transition: all 0.3s;
         }
         input:focus, select:focus, textarea:focus {
-            outline: none; border-color: #ff6b6b; box-shadow: 0 0 0 3px rgba(255,107,107,0.1);
+            outline: none; border-color: #ff6b6b; box-shadow: 0 0 0 3px rgba(255,107,107,0.2);
+            background: white;
         }
 
         .submit-btn {
@@ -304,7 +430,8 @@
         .submit-btn:disabled { opacity: 0.7; }
 
         .result-message {
-            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            background: rgba(240, 253, 244, 0.9);
+            backdrop-filter: blur(10px);
             border-left: 5px solid #22c55e;
             padding: 15px;
             border-radius: 20px;
@@ -313,7 +440,7 @@
             display: none;
             animation: slideIn 0.4s ease;
         }
-        .result-message.error { background: linear-gradient(135deg, #fef2f2, #fee2e2); border-left-color: #ef4444; }
+        .result-message.error { background: rgba(254, 242, 242, 0.9); border-left-color: #ef4444; }
         .result-message.show { display: block; }
 
         .loading {
@@ -334,13 +461,14 @@
 
         .music-control, .theme-toggle {
             position: fixed;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
             border-radius: 50px;
             padding: 8px 12px;
             z-index: 1000;
             display: flex;
             gap: 8px;
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         .music-control { bottom: 20px; right: 20px; }
         .theme-toggle { bottom: 20px; left: 20px; }
@@ -352,15 +480,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             padding: 30px;
             border-radius: 50px;
             z-index: 10000;
             display: none;
             text-align: center;
-            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+            box-shadow: 0 0 100px rgba(0,0,0,0.3);
             animation: bounceIn 0.5s ease;
             max-width: 90%;
+            border: 1px solid rgba(255,255,255,0.5);
         }
         @keyframes bounceIn {
             0% { transform: translate(-50%, -50%) scale(0); }
@@ -377,14 +507,13 @@
             cursor: pointer;
         }
 
-        footer { background: #f1f5f9; padding: 15px; text-align: center; font-size: 0.7rem; color: #64748b; }
+        footer { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 15px; text-align: center; font-size: 0.7rem; color: #1e1b4b; border-top: 1px solid rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
     <div class="dynamic-bg" id="dynamicBg"></div>
     <div class="bg-overlay"></div>
 
-    <!-- Музыкальный плеер -->
     <div class="music-control">
         <button class="music-btn" id="playMusicBtn">🎵</button>
         <button class="music-btn" id="stopMusicBtn">🔇</button>
@@ -393,7 +522,6 @@
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Переключатель темы -->
     <div class="theme-toggle">
         <button class="theme-btn" id="themeToggleBtn">🌙</button>
     </div>
@@ -419,8 +547,9 @@
         </div>
 
         <div class="compliment-banner" id="complimentBanner">💖 Загрузка...</div>
+        
+        <div class="online-status" id="onlineStatus">🟢 Veronica сейчас здесь!</div>
 
-        <!-- Статистика любви -->
         <div class="stats-container">
             <div class="stat-card">❤️ Визитов: <span id="visitCount">0</span></div>
             <div class="stat-card">💑 Дней вместе: <span id="daysTogether">0</span></div>
@@ -446,7 +575,67 @@
             <div class="quiz-result" id="quizResult"></div>
         </div>
 
-        <!-- Мини-игра "Найди сердечко" -->
+        <!-- Колесо удачи -->
+        <div class="wheel-section">
+            <div>🎡 Колесо удачи (крути и получай сердечки!) 🎡</div>
+            <div class="wheel" id="wheel">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#ff6b6b" stroke="white" stroke-width="2"/>
+                    <line x1="50" y1="50" x2="95" y2="50" stroke="white" stroke-width="2"/>
+                    <circle cx="50" cy="50" r="5" fill="white"/>
+                    <text x="50" y="30" text-anchor="middle" fill="white" font-size="8">5💖</text>
+                    <text x="70" y="55" text-anchor="middle" fill="white" font-size="8">10💖</text>
+                    <text x="50" y="80" text-anchor="middle" fill="white" font-size="8">20💖</text>
+                    <text x="25" y="55" text-anchor="middle" fill="white" font-size="8">15💖</text>
+                </svg>
+            </div>
+            <button class="wheel-btn" id="spinWheelBtn">🎡 Крутить колесо 🎡</button>
+            <div id="wheelResult" style="margin-top: 8px; text-align: center;"></div>
+        </div>
+
+        <!-- ИСПРАВЛЕННАЯ Раскраска любви -->
+        <div class="coloring-section">
+            <div>🎨 Раскраска любви (нажми на сердечко, выбери цвет) 🎨</div>
+            <div class="coloring-canvas" id="coloringCanvas">
+                <div class="coloring-item" data-symbol="❤️">❤️</div>
+                <div class="coloring-item" data-symbol="💖">💖</div>
+                <div class="coloring-item" data-symbol="💗">💗</div>
+                <div class="coloring-item" data-symbol="⭐">⭐</div>
+                <div class="coloring-item" data-symbol="🌸">🌸</div>
+            </div>
+            <div class="color-picker" id="colorPicker">
+                <div class="color-option" style="background: #ff0000;"></div>
+                <div class="color-option" style="background: #ff69b4;"></div>
+                <div class="color-option" style="background: #ffa500;"></div>
+                <div class="color-option" style="background: #800080;"></div>
+                <div class="color-option" style="background: #00bfff;"></div>
+                <div class="color-option" style="background: #ffd700;"></div>
+            </div>
+            <div id="coloringMessage" style="font-size:0.85rem; text-align:center; margin-top:8px; font-weight:bold;"></div>
+        </div>
+
+        <!-- Магия цветов -->
+        <div class="flower-collect-section">
+            <div>🌺 Магия цветов (собери букет) 🌺</div>
+            <div class="flower-collect-grid" id="flowerGrid">
+                <div class="flower-item" data-collected="false">🌹</div>
+                <div class="flower-item" data-collected="false">🌷</div>
+                <div class="flower-item" data-collected="false">🌻</div>
+                <div class="flower-item" data-collected="false">🌸</div>
+                <div class="flower-item" data-collected="false">🌺</div>
+            </div>
+            <div id="flowerMessage" style="font-size:0.8rem; text-align:center; margin-top:8px;"></div>
+        </div>
+
+        <!-- Тайные послания -->
+        <div class="secret-messages-section">
+            <div>💌 Тайные послания 💌</div>
+            <textarea class="secret-input" id="secretMessageInput" placeholder="Напиши секретное сообщение для айтишника..."></textarea>
+            <button class="surprise-btn" id="sendSecretBtn">📨 Отправить тайное послание</button>
+            <div id="secretMessagesList" style="margin-top: 10px; font-size: 0.8rem;"></div>
+        </div>
+
+        <!-- Мини-игра -->
         <div class="game-section">
             <div>🎮 Найди 3 спрятанных сердечка! 🎮</div>
             <div class="game-hearts" id="gameHearts">
@@ -457,7 +646,7 @@
             <div id="gameMessage" style="font-size: 0.8rem; margin-top: 5px;"></div>
         </div>
 
-        <!-- Режим "Свидание-сюрприз" -->
+        <!-- Свидание-сюрприз -->
         <div class="surprise-mode-section">
             <div>🎲 Режим "Свидание-сюрприз" 🎲</div>
             <button class="surprise-btn" id="surpriseModeBtn">🎁 Удиви меня! 🎁</button>
@@ -533,15 +722,38 @@
     localStorage.setItem('visits', visits);
     document.getElementById('visitCount').textContent = visits;
 
-    // Дней вместе с 1 февраля 2026 года
-    const startDate = new Date('2026-02-01');
+    // Дней вместе с 29 января 2026 года
+    const startDate = new Date('2026-01-29');
     const todayDate = new Date();
     const daysTogether = Math.floor((todayDate - startDate) / (1000 * 60 * 60 * 24));
     document.getElementById('daysTogether').textContent = daysTogether >= 0 ? daysTogether : 0;
 
     let heartScore = localStorage.getItem('heartScore') ? parseInt(localStorage.getItem('heartScore')) : 0;
     document.getElementById('heartScore').textContent = heartScore;
-    function addHeartScore(points) { heartScore += points; localStorage.setItem('heartScore', heartScore); document.getElementById('heartScore').textContent = heartScore; }
+    function addHeartScore(points) { 
+        heartScore += points; 
+        localStorage.setItem('heartScore', heartScore); 
+        document.getElementById('heartScore').textContent = heartScore; 
+        updateAchievements();
+        createFloatingHeart();
+    }
+
+    // ============================================
+    // ОНЛАЙН-СТАТУС
+    // ============================================
+    const onlineStatus = document.getElementById('onlineStatus');
+    let lastActive = new Date().getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        if (now - lastActive < 60000) {
+            onlineStatus.innerHTML = '🟢 Veronica сейчас здесь!';
+            onlineStatus.style.background = 'rgba(0,255,0,0.3)';
+        } else {
+            onlineStatus.innerHTML = '⚫ Veronica была недавно...';
+            onlineStatus.style.background = 'rgba(128,128,128,0.3)';
+        }
+    }, 5000);
+    document.body.addEventListener('mousemove', () => { lastActive = new Date().getTime(); });
 
     // ============================================
     // КОМПЛИМЕНТЫ
@@ -564,6 +776,17 @@
         document.body.appendChild(flower);
         setTimeout(() => flower.remove(), 10000);
     }, 800);
+
+    setInterval(() => {
+        const star = document.createElement('div');
+        star.innerHTML = ['⭐','🌟','💫'][Math.floor(Math.random()*3)];
+        star.className = 'rotating-star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.fontSize = (15 + Math.random() * 25) + 'px';
+        document.body.appendChild(star);
+        setTimeout(() => star.remove(), 8000);
+    }, 2000);
 
     setInterval(() => {
         const cat = document.createElement('div');
@@ -602,6 +825,113 @@
         document.querySelector('.bg-overlay').style.background = isDarkMode ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.2)';
         document.getElementById('themeToggleBtn').innerHTML = isDarkMode ? '☀️' : '🌙';
     };
+
+    // ============================================
+    // ИСПРАВЛЕННАЯ РАСКРАСКА ЛЮБВИ (работает!)
+    // ============================================
+    let currentColor = '#ff0000';
+    
+    // Выбор цвета
+    document.querySelectorAll('.color-option').forEach(opt => {
+        opt.onclick = () => { 
+            currentColor = opt.style.background;
+            document.getElementById('coloringMessage').innerHTML = `🎨 Выбран цвет: ${currentColor} 🎨`;
+            setTimeout(() => {
+                if (document.getElementById('coloringMessage').innerHTML.includes('Выбран')) {
+                    document.getElementById('coloringMessage').innerHTML = '';
+                }
+            }, 1500);
+        };
+    });
+    
+    // Клик по элементам раскраски
+    document.querySelectorAll('.coloring-item').forEach(item => {
+        item.onclick = () => {
+            // Меняем цвет символа
+            item.style.color = currentColor;
+            item.style.textShadow = `0 0 8px ${currentColor}`;
+            // Добавляем бонусные сердечки
+            addHeartScore(3);
+            document.getElementById('coloringMessage').innerHTML = '✨ +3 сердечка за раскраску! ✨';
+            setTimeout(() => {
+                if (document.getElementById('coloringMessage').innerHTML === '✨ +3 сердечка за раскраску! ✨') {
+                    document.getElementById('coloringMessage').innerHTML = '';
+                }
+            }, 1500);
+            // Эффект
+            createFloatingHeart();
+        };
+    });
+
+    // ============================================
+    // КОЛЕСО УДАЧИ
+    // ============================================
+    let spinning = false;
+    document.getElementById('spinWheelBtn').onclick = () => {
+        if (spinning) return;
+        spinning = true;
+        const wheel = document.querySelector('#wheel svg');
+        const spins = Math.floor(Math.random() * 360) + 720;
+        wheel.style.transform = `rotate(${spins}deg)`;
+        setTimeout(() => {
+            const prizes = [5, 10, 20, 15];
+            const prize = prizes[Math.floor(Math.random() * prizes.length)];
+            addHeartScore(prize);
+            document.getElementById('wheelResult').innerHTML = `🎉 Ты выиграла ${prize} сердечек! 🎉`;
+            createFloatingHeart();
+            spinning = false;
+            wheel.style.transform = '';
+        }, 3000);
+    };
+
+    // ============================================
+    // МАГИЯ ЦВЕТОВ
+    // ============================================
+    let collectedFlowers = 0;
+    document.querySelectorAll('.flower-item').forEach(flower => {
+        flower.onclick = () => {
+            if (flower.dataset.collected === 'false') {
+                flower.dataset.collected = 'true';
+                flower.classList.add('collected');
+                collectedFlowers++;
+                addHeartScore(10);
+                if (collectedFlowers === 5) {
+                    addHeartScore(50);
+                    showSurprise('🎉 Ты собрала полный букет! +50 сердечек! 🎉');
+                    document.getElementById('flowerMessage').innerHTML = '🌹 Полный букет собран! Ты волшебница! 🌹';
+                } else {
+                    document.getElementById('flowerMessage').innerHTML = `🌺 Собрано ${collectedFlowers}/5 цветов! +10 сердечек! 🌺`;
+                }
+                createFloatingHeart();
+            }
+        };
+    });
+
+    // ============================================
+    // ТАЙНЫЕ ПОСЛАНИЯ
+    // ============================================
+    document.getElementById('sendSecretBtn').onclick = () => {
+        const msg = document.getElementById('secretMessageInput').value.trim();
+        if (msg) {
+            let secrets = JSON.parse(localStorage.getItem('secretMessages') || '[]');
+            secrets.push({ text: msg, date: new Date().toLocaleString() });
+            localStorage.setItem('secretMessages', JSON.stringify(secrets));
+            displaySecretMessages();
+            document.getElementById('secretMessageInput').value = '';
+            addHeartScore(5);
+            showSurprise('💌 Тайное послание отправлено айтишнику! 💌');
+        }
+    };
+    function displaySecretMessages() {
+        const secrets = JSON.parse(localStorage.getItem('secretMessages') || '[]');
+        const container = document.getElementById('secretMessagesList');
+        if (secrets.length === 0) {
+            container.innerHTML = '<i>Пока нет тайных посланий...</i>';
+        } else {
+            container.innerHTML = secrets.slice(-3).reverse().map(s => `💌 "${s.text}" (${s.date})`).join('<br>');
+        }
+    }
+    displaySecretMessages();
 
     // ============================================
     // МИНИ-ИГРА
@@ -726,6 +1056,7 @@
         if (heartScore >= 100) achievements.push("🥈 Мастер любви (100 сердечек)");
         if (heartScore >= 200) achievements.push("🥇 Легенда любви (200 сердечек)");
         if (foundCount === 3) achievements.push("🔍 Искатель сокровищ");
+        if (collectedFlowers === 5) achievements.push("🌺 Флорист (полный букет)");
         const container = document.getElementById('achievementsList');
         if (achievements.length === 0) container.innerHTML = '<span style="font-size:0.7rem;">Пока нет достижений. Играй и получай!</span>';
         else container.innerHTML = achievements.map(a => `<span class="achievement-badge">${a}</span>`).join('');
@@ -885,7 +1216,7 @@
     }
 
     setTimeout(() => {
-        showResult('💖 Привет, моя любимая! Играй, открывай сюрпризы и бронируй наше свидание! 💖', 'success');
+        showResult('💖 Привет, моя любимая! Играй, крути колесо, собирай цветы и бронируй наше свидание! 💖', 'success');
         setTimeout(() => resultMsg.classList.remove('show'), 6000);
     }, 1000);
 </script>
