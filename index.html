@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Veronica ❤️ Даёт шанс айтишнику</title>
+    <title>Veronica ❤️ Даёт шанс айтишнику — с котами и Telegram</title>
     <style>
         * {
             margin: 0;
@@ -22,7 +22,7 @@
         }
 
         .date-card {
-            max-width: 550px;
+            max-width: 600px;
             width: 100%;
             background: white;
             border-radius: 48px;
@@ -47,21 +47,42 @@
             padding: 24px 24px 20px;
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gif-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .gif-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .avatar-icon {
             font-size: 64px;
             margin-bottom: 8px;
+            position: relative;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .story-header h2 {
             font-size: 1.5rem;
             margin-bottom: 8px;
-        }
-
-        .story-header p {
-            opacity: 0.85;
-            font-size: 0.9rem;
+            position: relative;
         }
 
         .veronica-name {
@@ -73,6 +94,13 @@
             font-weight: bold;
             margin-top: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(255,107,107,0.3); }
+            50% { box-shadow: 0 4px 25px rgba(255,107,107,0.8); }
         }
 
         .form-section {
@@ -114,16 +142,6 @@
         textarea {
             resize: vertical;
             min-height: 80px;
-        }
-
-        .date-time-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .date-time-group select {
-            flex: 1;
         }
 
         .slots-info {
@@ -171,6 +189,7 @@
             margin-top: 20px;
             font-size: 0.9rem;
             display: none;
+            position: relative;
         }
 
         .result-message.error {
@@ -180,6 +199,18 @@
 
         .result-message.show {
             display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .loading {
@@ -198,12 +229,63 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Галерея GIF котов */
+        .cats-gallery {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cat-gif {
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .cat-gif:hover {
+            transform: scale(1.1);
+            border-color: #ff6b6b;
+        }
+
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 24px;
+            animation: floatUp 2s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(20deg);
+            }
+        }
+
         footer {
             background: #f1f5f9;
             padding: 16px 24px;
             text-align: center;
             font-size: 0.75rem;
             color: #64748b;
+        }
+
+        .telegram-setup {
+            background: #e8f0fe;
+            padding: 12px;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            font-size: 0.8rem;
         }
 
         .note {
@@ -217,20 +299,33 @@
 <body>
 <div class="date-card">
     <div class="story-header">
-        <div class="avatar-icon">🧑‍💻❤️👩</div>
+        <div class="avatar-icon">🧑‍💻❤️🐱👩</div>
         <h2>Дала шанс айтишнику?</h2>
         <div class="veronica-name">✨ Veronica ✨</div>
-        <p style="margin-top: 12px;">«Я починю всё, что угодно. А ещё — приглашаю на свидание мечты. Выбери дату, и я всё организую!»</p>
+        <p style="margin-top: 12px;">«Я починю всё, что угодно. А ещё — приглашаю на свидание мечты! 🐱💖»</p>
     </div>
 
     <div class="form-section">
-        <div class="slots-info" id="slotsInfo">
-            📅 Выбери дату, чтобы увидеть свободные слоты
+        <!-- Милые котики -->
+        <div class="cats-gallery" id="catsGallery">
+            <img class="cat-gif" src="https://media.tenor.com/6pGZ5j4Gg5MAAAAi/cat-love.gif" alt="love cat">
+            <img class="cat-gif" src="https://media.tenor.com/Uz4J8j6uM5oAAAAi/cat-kiss.gif" alt="kiss cat">
+            <img class="cat-gif" src="https://media.tenor.com/4o8VZ4Z4Z4oAAAAi/cat-heart.gif" alt="heart cat">
+            <img class="cat-gif" src="https://media.tenor.com/8h5Y5Y5Y5YgAAAAi/cat-hug.gif" alt="hug cat">
+            <img class="cat-gif" src="https://media.tenor.com/2x5x5x5x5xUAAAAi/cat-dance.gif" alt="dance cat">
+        </div>
+
+        <div class="telegram-setup" id="telegramSetup">
+            🤖 <strong>Telegram уведомления</strong><br>
+            <small>Введи свой Telegram Bot Token и Chat ID (инструкция ниже)</small>
+            <input type="text" id="botToken" placeholder="Bot Token (например: 1234567890:ABCdefGHIjklMNO)" style="margin-top: 8px; font-size: 0.8rem;">
+            <input type="text" id="chatId" placeholder="Chat ID (например: 123456789)" style="margin-top: 6px; font-size: 0.8rem;">
+            <button id="testTelegramBtn" style="margin-top: 8px; padding: 6px 12px; background: #26a5e4; color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 0.75rem;">📨 Тест уведомления</button>
         </div>
 
         <form id="dateForm">
             <div class="form-group">
-                <label>💫 Твоё имя (уже Veronica, но можешь написать)</label>
+                <label>💫 Твоё имя</label>
                 <input type="text" id="girlName" value="Veronica" placeholder="Veronica" required>
             </div>
 
@@ -248,55 +343,99 @@
 
             <div class="form-group">
                 <label>🎯 Чем хочешь заняться?</label>
-                <textarea id="activity" placeholder="Напиши, что тебе нравится: кофе, прогулка, кино, квест, ужин, настолки, концерт... Я всё устрою!"></textarea>
+                <textarea id="activity" placeholder="Напиши, что тебе нравится: кофе, прогулка, кино, квест, ужин, настолки, концерт... Я всё устрою! 🐱"></textarea>
             </div>
 
             <div class="form-group">
                 <label>💝 Что для тебя важно на свидании?</label>
-                <textarea id="wishes" placeholder="Например: цветы, без фастфуда, чтобы было весело, сюрприз, или просто честный разговор..."></textarea>
+                <textarea id="wishes" placeholder="Например: цветы, котики, без фастфуда, чтобы было весело, сюрприз... 💖"></textarea>
             </div>
 
             <div class="form-group">
-                <label>📧 Твой email (чтобы я отправил подтверждение)</label>
-                <input type="email" id="girlEmail" placeholder="veronica@example.com" required>
+                <label>📧 Твой Telegram (или email, чтобы я написал)</label>
+                <input type="text" id="girlContact" placeholder="@username или email" required>
             </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">💾 ЗАБРОНИРОВАТЬ ДАТУ →</button>
+            <button type="submit" class="submit-btn" id="submitBtn">💾 ЗАБРОНИРОВАТЬ ДАТУ → 🐱💖</button>
         </form>
 
         <div id="resultMsg" class="result-message"></div>
         <div class="note">
-            🔐 После бронирования я получу уведомление на Gmail и отправлю тебе подтверждение
+            🐱 Нажми на любого котика — получишь порцию любви! 💖<br>
+            🤖 После бронирования я получу уведомление в Telegram и свяжусь с тобой
         </div>
     </div>
     <footer>
-        ✨ Айтишник настроит сервер, купит билеты и придумает квест по твоим пожеланиям ✨
+        ✨ Айтишник + Котики = Идеальное свидание ✨
     </footer>
 </div>
 
 <script>
     // ====================================================
-    // НАСТРОЙКА ДЛЯ ОТПРАВКИ УВЕДОМЛЕНИЙ НА ВАШУ GMAIL
+    // НАСТРОЙКА TELEGRAM БОТА
     // ====================================================
-    // Для отправки писем используем сервис EmailJS (бесплатно, 200 писем/месяц)
-    // 1. Зарегистрируйся на https://www.emailjs.com/
-    // 2. Подтверди email
-    // 3. Создай сервис (Gmail)
-    // 4. Создай шаблон письма
-    // 5. Вставь свои ID ниже
+    // ИНСТРУКЦИЯ:
+    // 1. Напиши в Telegram: @BotFather
+    // 2. Отправь команду: /newbot
+    // 3. Придумай имя боту (например: VeronicaDateBot)
+    // 4. Получи Bot Token (типа: 1234567890:ABCdefGHIjklMNO)
+    // 5. Напиши боту: @userinfobot → получишь свой Chat ID
+    // 6. Введи эти данные в поля выше на сайте
     
-    // ВРЕМЕННО: пока не настроен EmailJS, показываем демо-режим с копированием данных
-    // Но я дам готовую инструкцию для реальной отправки
+    // Функция отправки в Telegram
+    async function sendTelegramMessage(botToken, chatId, message) {
+        if (!botToken || !chatId) {
+            console.log('Telegram не настроен');
+            return { success: false, error: 'Telegram Bot Token или Chat ID не указаны' };
+        }
+        
+        try {
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            const data = await response.json();
+            if (data.ok) {
+                return { success: true };
+            } else {
+                return { success: false, error: data.description };
+            }
+        } catch (err) {
+            console.error('Ошибка отправки в Telegram:', err);
+            return { success: false, error: err.message };
+        }
+    }
     
-    const USE_EMAILJS = false;  // Поставь true после регистрации на EmailJS
-    
-    // Твои данные из EmailJS (замени после регистрации)
-    const EMAILJS_SERVICE_ID = 'service_xxxxxxx';  // ID сервиса
-    const EMAILJS_TEMPLATE_ID = 'template_xxxxxx'; // ID шаблона
-    const EMAILJS_PUBLIC_KEY = 'user_xxxxxxxxxxxxx'; // Публичный ключ
-    
-    // Твоя почта для уведомлений
-    const MY_GMAIL = 'tvoja-pochta@gmail.com';  // ЗАМЕНИ НА СВОЮ GMAIL
+    // Генерация красивых сообщений с эмодзи и котиками
+    function formatTelegramMessage(bookingData) {
+        const loveGifs = ['🐱', '💖', '😻', '💕', '🐈', '💗', '✨', '🌸', '🥰', '🎀'];
+        const randomLove = loveGifs[Math.floor(Math.random() * loveGifs.length)];
+        
+        return `
+${randomLove} <b>НОВОЕ СВИДАНИЕ ОТ VERONICA!</b> ${randomLove}
+
+👤 <b>Имя:</b> ${bookingData.name}
+📅 <b>Дата:</b> ${bookingData.date}
+⏰ <b>Время:</b> ${bookingData.time}
+🎯 <b>Активность:</b> ${bookingData.activity || '🌍 Сюрприз от айтишника'}
+💝 <b>Пожелания:</b> ${bookingData.wishes || '✨ Сделаю максимально душевно'}
+📱 <b>Контакт:</b> ${bookingData.contact}
+
+🐱 <b>Она дала шанс айтишнику!</b> 🧑‍💻
+⏰ Время бронирования: ${new Date(bookingData.timestamp).toLocaleString()}
+
+💖 <i>Готовь сюрприз и бери цветы! И конечно — котиков!</i> ${randomLove}
+        `.trim();
+    }
     
     // Генерация временных слотов
     function generateTimeSlots() {
@@ -332,7 +471,6 @@
         const selectedDate = datePicker.value;
         if (!selectedDate) return;
         
-        // В демо-режиме все слоты свободны
         const freeSlots = slots;
         timeSelect.innerHTML = '<option value="">-- Выбери время --</option>';
         freeSlots.forEach(slot => {
@@ -344,78 +482,75 @@
         slotsInfoDiv.innerHTML = `✅ Свободные слоты на ${selectedDate}: ${freeSlots.join(', ')}`;
     });
     
-    // Отправка уведомления на твою Gmail через EmailJS
-    async function sendNotificationToMe(bookingData) {
-        if (!USE_EMAILJS) {
-            console.log('ДЕМО-РЕЖИМ: Данные бронирования:', bookingData);
-            return { success: true, mock: true };
-        }
+    // Эффект летающих сердечек
+    function createFloatingHeart() {
+        const heart = document.createElement('div');
+        heart.innerHTML = ['❤️', '💖', '💗', '💓', '💕', '🐱', '😻', '💘'][Math.floor(Math.random() * 8)];
+        heart.className = 'floating-heart';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.top = window.innerHeight - 100 + 'px';
+        heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+        document.body.appendChild(heart);
         
-        try {
-            // Загружаем EmailJS библиотеку динамически
-            await loadEmailJS();
-            
-            const templateParams = {
-                to_email: MY_GMAIL,
-                from_name: bookingData.name,
-                booking_date: bookingData.date,
-                booking_time: bookingData.time,
-                activity: bookingData.activity || 'Не указано',
-                wishes: bookingData.wishes || 'Не указано',
-                user_email: bookingData.email,
-                message: `Новое бронирование от ${bookingData.name}!\n\nДата: ${bookingData.date}\nВремя: ${bookingData.time}\nАктивность: ${bookingData.activity}\nПожелания: ${bookingData.wishes}\nEmail: ${bookingData.email}`
-            };
-            
-            const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
-            return { success: true, response };
-        } catch (err) {
-            console.error('Ошибка отправки EmailJS:', err);
-            return { success: false, error: err.message };
+        setTimeout(() => {
+            heart.remove();
+        }, 2000);
+    }
+    
+    // Функция для создания взрыва сердечек
+    function heartExplosion() {
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => createFloatingHeart(), i * 50);
         }
     }
     
-    // Отправка подтверждения девушке
-    async function sendConfirmationToGirl(bookingData) {
-        if (!USE_EMAILJS) {
-            console.log('ДЕМО-РЕЖИМ: Отправка подтверждения на', bookingData.email);
-            return { success: true, mock: true };
-        }
-        
-        try {
-            const templateParams = {
-                to_email: bookingData.email,
-                to_name: bookingData.name,
-                booking_date: bookingData.date,
-                booking_time: bookingData.time,
-                activity: bookingData.activity || 'Сюрприз от айтишника',
-                wishes: bookingData.wishes || 'Будет максимально душевно',
-                message: `Привет, ${bookingData.name}! 💖\n\nТы дала шанс айтишнику! 🧑‍💻\n\nСвидание состоится ${bookingData.date} в ${bookingData.time}.\n\nЧем займёмся: ${bookingData.activity || '✨ я придумаю что-то особенное ✨'}\nТвои пожелания: ${bookingData.wishes || 'учту всё, обещаю!'}\n\nЖду с нетерпением! Приготовлю сюрприз. ❤️\n\nP.S. Wi-Fi и пароль от Netflix уже настроил 😄`
-            };
-            
-            const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
-            return { success: true, response };
-        } catch (err) {
-            console.error('Ошибка отправки подтверждения:', err);
-            return { success: false, error: err.message };
-        }
-    }
-    
-    function loadEmailJS() {
-        return new Promise((resolve, reject) => {
-            if (window.emailjs) {
-                resolve();
-                return;
-            }
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-            script.onload = () => {
-                emailjs.init(EMAILJS_PUBLIC_KEY);
-                resolve();
-            };
-            script.onerror = reject;
-            document.head.appendChild(script);
+    // Обработка нажатия на котиков
+    const catGifs = document.querySelectorAll('.cat-gif');
+    catGifs.forEach(cat => {
+        cat.addEventListener('click', () => {
+            heartExplosion();
+            // Показываем милое сообщение
+            const messages = [
+                '🐱 Мяу! Котик тебя любит! 💖',
+                '💕 Этот котик желает вам счастья! 😻',
+                '🐈 Пусть у вас будет много любви и котиков! 💗',
+                '😻 Котик одобряет твой выбор! 💖',
+                '🐱 Мур-мур! Любовь в воздухе! 💕'
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            showResult(randomMsg, 'success');
+            setTimeout(() => {
+                const resultDiv = document.getElementById('resultMsg');
+                resultDiv.classList.remove('show');
+            }, 2000);
         });
-    }
+    });
+    
+    // Тест Telegram
+    const testBtn = document.getElementById('testTelegramBtn');
+    testBtn.addEventListener('click', async () => {
+        const botToken = document.getElementById('botToken').value.trim();
+        const chatId = document.getElementById('chatId').value.trim();
+        
+        if (!botToken || !chatId) {
+            showResult('❌ Введи Bot Token и Chat ID для теста!', 'error');
+            return;
+        }
+        
+        testBtn.disabled = true;
+        testBtn.textContent = '📨 Отправляю...';
+        
+        const result = await sendTelegramMessage(botToken, chatId, '🐱 Тестовое сообщение от сайта Veronica! Бот работает! 💖\n\nТы получишь уведомление, когда Veronica забронирует свидание! 🧑‍💻❤️');
+        
+        if (result.success) {
+            showResult('✅ Уведомление успешно отправлено в Telegram! Проверь! 💖', 'success');
+        } else {
+            showResult(`❌ Ошибка: ${result.error}\n\nПроверь Bot Token и Chat ID. Подробнее в инструкции.`, 'error');
+        }
+        
+        testBtn.disabled = false;
+        testBtn.textContent = '📨 Тест уведомления';
+    });
     
     // Обработка формы
     const form = document.getElementById('dateForm');
@@ -436,7 +571,10 @@
         const time = timeSelect.value;
         const activity = document.getElementById('activity').value.trim();
         const wishes = document.getElementById('wishes').value.trim();
-        const email = document.getElementById('girlEmail').value.trim();
+        const contact = document.getElementById('girlContact').value.trim();
+        
+        const botToken = document.getElementById('botToken').value.trim();
+        const chatId = document.getElementById('chatId').value.trim();
         
         if (!date) {
             showResult('Выбери дату свидания 🗓️', 'error');
@@ -446,8 +584,8 @@
             showResult('Выбери время встречи ⏰', 'error');
             return;
         }
-        if (!email) {
-            showResult('Напиши свой email, чтобы я прислал подтверждение 📧', 'error');
+        if (!contact) {
+            showResult('Напиши свой Telegram или email, чтобы я мог связаться с тобой 📱', 'error');
             return;
         }
         
@@ -457,22 +595,28 @@
             time: time,
             activity: activity,
             wishes: wishes,
-            email: email,
+            contact: contact,
             timestamp: new Date().toISOString()
         };
         
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="loading"></span> Бронируем дату и отправляем уведомление...';
+        submitBtn.innerHTML = '<span class="loading"></span> Бронируем дату и отправляем уведомление в Telegram... 🐱💖';
+        
+        // Анимация сердечек
+        heartExplosion();
         
         await new Promise(resolve => setTimeout(resolve, 1500));
         
-        // Отправляем уведомление тебе на Gmail
-        const notifyResult = await sendNotificationToMe(bookingData);
+        // Формируем сообщение для Telegram
+        const telegramMessage = formatTelegramMessage(bookingData);
         
-        // Отправляем подтверждение Veronica
-        const confirmResult = await sendConfirmationToGirl(bookingData);
+        // Отправляем уведомление в Telegram
+        let telegramResult = { success: false };
+        if (botToken && chatId) {
+            telegramResult = await sendTelegramMessage(botToken, chatId, telegramMessage);
+        }
         
-        if ((notifyResult.success || notifyResult.mock) && (confirmResult.success || confirmResult.mock)) {
+        if (telegramResult.success || (!botToken && !chatId)) {
             // Сохраняем в localStorage для истории
             saveToHistory(bookingData);
             
@@ -480,35 +624,41 @@
                 ✨ <strong>${name}, ты дала шанс айтишнику!</strong> ✨<br><br>
                 📅 Свидание назначено на <strong>${date} в ${time}</strong><br>
                 🎯 Мы займёмся: ${activity || '🌍 сюрпризом (айтишник что-то придумает)'}<br>
-                💝 Учту пожелания: ${wishes || 'сделаю максимально душевно'}<br><br>
-                📧 Подтверждение отправлено на ${email}<br>
+                💝 Учту пожелания: ${wishes || 'сделаю максимально душевно'}<br>
+                📱 Я свяжусь с тобой через: ${contact}<br><br>
+                🐱 <strong>Уведомление отправлено в Telegram!</strong> Я уже всё увидел и готовлю сюрприз! 💖<br>
             `;
             
-            if (!USE_EMAILJS) {
-                message += `<br><span style="color: #ff6b6b;">⚠️ ДЕМО-РЕЖИМ: EmailJS не настроен. Чтобы отправлять реальные письма, зарегистрируйся на emailjs.com и вставь свои ID в код.</span><br><br>
-                📋 Данные для ручного копирования:<br>
+            if (!botToken || !chatId) {
+                message += `<br><span style="color: #ff6b6b;">⚠️ Telegram не настроен. Чтобы получать уведомления в Telegram, введи Bot Token и Chat ID в поля выше.</span><br><br>
+                📋 <strong>Данные для ручного копирования:</strong><br>
                 👤 Имя: ${name}<br>
                 📅 Дата: ${date} ${time}<br>
                 🎯 Активность: ${activity || '-'}<br>
                 💝 Пожелания: ${wishes || '-'}<br>
-                📧 Email девушки: ${email}<br>
+                📱 Контакт: ${contact}<br>
                 <button onclick="copyToClipboard()" style="margin-top:10px; padding:8px 16px; background:#8b5cf6; color:white; border:none; border-radius:12px; cursor:pointer;">📋 Скопировать все данные</button>`;
+            } else if (!telegramResult.success) {
+                message += `<br><span style="color: #ff6b6b;">⚠️ Ошибка отправки в Telegram: ${telegramResult.error}</span><br>Но данные сохранены! ❤️`;
             } else {
-                message += `<br>🎉 Я получил уведомление на почту! Жди меня в назначенное время ❤️<br>
-                <small>P.S. Заодно настрою тебе Wi-Fi и VPN ☕</small>`;
+                message += `<br>🎉 <strong>Я получил уведомление в Telegram!</strong> Скоро напишу тебе! Жди с нетерпением ❤️<br>
+                🐱 P.S. Котики тоже ждут нашей встречи! 😻`;
             }
             
             showResult(message, 'success');
             
-            // Очищаем только activity и wishes, остальное оставляем
+            // Очищаем активность и пожелания
             document.getElementById('activity').value = '';
             document.getElementById('wishes').value = '';
+            
+            // Ещё одна порция сердечек
+            setTimeout(() => heartExplosion(), 500);
         } else {
-            showResult(`😔 Ошибка бронирования. Попробуй ещё раз или напиши мне в Telegram.`, 'error');
+            showResult(`😔 Ошибка бронирования: ${telegramResult.error || 'Попробуй ещё раз или проверь настройки Telegram.'}`, 'error');
         }
         
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '💾 ЗАБРОНИРОВАТЬ ДАТУ →';
+        submitBtn.innerHTML = '💾 ЗАБРОНИРОВАТЬ ДАТУ → 🐱💖';
     });
     
     function showResult(message, type) {
@@ -519,7 +669,7 @@
         
         setTimeout(() => {
             resultMsgDiv.classList.remove('show');
-        }, 12000);
+        }, 10000);
     }
     
     function saveToHistory(booking) {
@@ -535,12 +685,20 @@
             time: timeSelect.value,
             activity: document.getElementById('activity').value,
             wishes: document.getElementById('wishes').value,
-            email: document.getElementById('girlEmail').value
+            contact: document.getElementById('girlContact').value
         };
         const text = JSON.stringify(data, null, 2);
         navigator.clipboard.writeText(text);
-        alert('✅ Данные скопированы! Можешь отправить их себе на почту вручную.');
+        alert('✅ Данные скопированы! Можешь отправить их себе вручную.');
+        heartExplosion();
     };
+    
+    // Добавляем плавающие сердечки при загрузке страницы
+    setInterval(() => {
+        if (Math.random() > 0.7) {
+            createFloatingHeart();
+        }
+    }, 5000);
 </script>
 </body>
 </html>
